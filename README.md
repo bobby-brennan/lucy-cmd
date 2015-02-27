@@ -11,7 +11,7 @@ You can get an API key at [https://lucybot.com/register](https://lucybot.com/reg
 ## Usage
 ```
 lucy build \
-  --apikey="your_lucybot_apikey"
+  --apikey="your_lucybot_apikey" \
   --directory=path/to/app \
   --destination=path/to/dest \
   --server="node" \
