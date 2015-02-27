@@ -25,10 +25,14 @@ lucy publish \
   --directory=path/to/app
 ```
 
+`lucy publish` will publish each file in `--directory` to the App Generator API as `./{type}s/{language}/{name}.{extension}`
+
+`lucy build` will build your app in the specified languages, using these files instead of the files currently published. This allows you to work on your app locally before publishing it.
+
 ## App Directory Structure
 A sample directory is at [http://github.com/bobby-brennan/cb-getty](http://github.com/bobby-brennan/cb-getty)
 
-The directory specified by --directory flag should be structured as
+The directory specified by `--directory` flag should be structured as
 
 ```
 + actions/
@@ -44,7 +48,3 @@ The directory specified by --directory flag should be structured as
         - view1.ejs.html
         - view2.ejs.html
 ```
-
-`lucy publish` will publish each file in the directory to the App Generator API as ./{type}s/{language}/{name}.{extension}
-
-`lucy build` will build your app in the specified language, using these files instead of the files currently published. This allows you to work on your app locally before publishing it.
