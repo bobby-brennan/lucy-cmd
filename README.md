@@ -25,7 +25,7 @@ lucy publish \
   --directory=path/to/app
 ```
 
-`lucy publish` will publish each file in `--directory` to the App Generator API as `./{type}s/{language}/{name}.{extension}`
+`lucy publish` will publish each file in `--directory` to the App Generator API as ./{type}s/{language}/{name}.{extension}
 
 `lucy build` will build your app in the specified languages, using these files instead of the files currently published. This allows you to work on your app locally before publishing it.
 
