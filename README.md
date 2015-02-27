@@ -35,7 +35,7 @@ lucy publish \
 ## App Directory Structure
 A sample directory is at [http://github.com/bobby-brennan/cb-getty](http://github.com/bobby-brennan/cb-getty)
 
-The directory specified by `--directory` flag should be structured as
+The directory specified by `--directory` should be structured as
 
 ```
 + actions/
