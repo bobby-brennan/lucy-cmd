@@ -20,12 +20,15 @@ lucy build \
   --actions="action1"
   
 lucy publish \
-  --apikey="your_lucybot_apikey"
-  --apisecret="your_lucybot_apisecret"
-  --directory=path/to/app
+  --apikey="your_lucybot_apikey" \
+  --apisecret="your_lucybot_apisecret" \
+  --name="my_app" \
+  --directory=path/to/app \
+  --views="view1,view2" \
+  --actions="action1"
 ```
 
-`lucy publish` will publish each file in `--directory` to the App Generator API as ./{type}s/{language}/{name}.{extension}
+`lucy publish` will publish the contents of `--directory` to the App Generator API
 
 `lucy build` will build your app in the specified languages, using these files instead of the files currently published. This allows you to work on your app locally before publishing it.
 
