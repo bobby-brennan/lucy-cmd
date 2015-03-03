@@ -9,10 +9,15 @@ args.host = args.host || 'https://api.lucybot.com',
 args.directory = args.directory || process.cwd();
 if (command === 'build') {
   if (!args.server || !args.client) {
-    throw new Error("You must specify both --client and --server languages")
+    if (args.server || args.client) {
+      throw new Error("You must specify both --client and --server languages")
+    } else {
+      args.server = "javascript";
+      args.client = "html-angular";
+    }
   }
   if (!args.destination) {
-    args.destination = Path.join(process.cwd(), 'build', args.server, args.client);
+    args.destination = Path.join(process.cwd(), 'build');
     Mkdirp.sync(args.destination);
   }
   if (!args.views) {

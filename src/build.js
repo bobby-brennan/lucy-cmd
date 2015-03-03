@@ -34,7 +34,7 @@ var createApp = function(args, callback) {
       }
     }
   }
-  app.answers = JSON.parse(args.answers);
+  app.answers = args.answers ? JSON.parse(args.answers) : {};
   var actions = args.actions ? args.actions.split(',') : [];
   var views = args.views ? args.views.split(',') : [];
   if (args.prod) {
