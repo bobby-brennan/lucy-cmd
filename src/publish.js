@@ -39,12 +39,44 @@ Publish.run = function(args) {
       })
     })
   })
+  var app = {
+    views: args.views.split(','),
+    actions: args.actions.split(','),
+  }
+  postApp(args, args.name, app, {key: args.apikey, secret: args.apisecret}, function(resp) {
+    if (!resp.success) {
+      console.log("FAILURE while publishing app " + args.name + '\nDetails:' + JSON.stringify(resp)) 
+    } else {
+      console.log('Published app ' + args.name);
+    }
+  });
+}
+
+var postApp = function(args, name, app, creds, callback) {
+  var apiCall = args.host + '/v1/app';
+  var callBody = {
+    name: name,
+    app: app
+  }
+  Request({
+    url: apiCall,
+    method: 'post',
+    json: true,
+    body: callBody,
+    headers: {
+      'apikey': creds.key,
+      'apisecret': creds.secret
+    }
+  }, function(err, resp, body) {
+    if (err) throw err;
+    callback(body);
+  })
 }
 
 var postFile = function(contents, args, creds, callback) {
   var apiCall = args.host + '/v1/app/' + args.type;
   var callBody = {
-      id: args.name,
+      name: args.name,
       language: args.language,
   }
   callBody[args.type] = contents;
