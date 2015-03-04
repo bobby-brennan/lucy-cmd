@@ -1,5 +1,5 @@
 # lucy
-lucy is a command-line tool for working with [LucyBot's App Generator API](https://lucybot.com/)
+lucy is a command-line tool for working with [LucyBot's App Generator API](https://lucybot.com/blog/app-generator)
 
 ## Installation
 ```
