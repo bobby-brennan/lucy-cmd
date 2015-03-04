@@ -33,7 +33,7 @@ lucy publish \
 `lucy build` will build your app in the specified languages, using these files instead of the files currently published. This allows you to work on your app locally before publishing it.
 
 ## App Directory Structure
-A sample directory is at [http://github.com/bobby-brennan/cb-getty](http://github.com/bobby-brennan/cb-getty)
+A sample directory is at [http://github.com/lucybot/hacker-news](http://github.com/lucybot/hacker-news)
 
 The directory specified by `--directory` should be structured as
 
