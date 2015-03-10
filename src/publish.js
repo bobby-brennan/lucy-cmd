@@ -10,9 +10,9 @@ Publish.run = function(args) {
   if (!args.apikey && !args.apisecret) {
     return console.log('You must specify both --apikey and --apisecret to publish');
   }
+  var creds = {key: args.apikey, secret: args.apisecret};
   ['view', 'action'].forEach(function(type) {
     var typeDir = Path.join(args.directory, type + 's');
-    console.log('dir:' + typeDir);
     FS.readdir(typeDir, function(err, langs) {
       if (err) throw err;
       langs.forEach(function(l) {
@@ -26,7 +26,7 @@ Publish.run = function(args) {
                 language: l,
                 name: fileName,
                 type: type
-              }, {key: args.apikey, secret: args.apisecret}, function(resp) {
+              }, creds, function(resp) {
                 if (!resp.success) {
                   console.log('FAILURE while publishing ' + Path.join(langDir, f) + '\nDetails:' + JSON.stringify(resp));
                 } else {
@@ -39,25 +39,33 @@ Publish.run = function(args) {
       })
     })
   })
-  var app = {
-    views: args.views.split(','),
-    actions: args.actions.split(','),
-  }
-  postApp(args, args.name, app, {key: args.apikey, secret: args.apisecret}, function(resp) {
-    if (!resp.success) {
-      console.log("FAILURE while publishing app " + args.name + '\nDetails:' + JSON.stringify(resp)) 
-    } else {
-      console.log('Published app ' + args.name);
-    }
-  });
+  var recipeDir = Path.join(args.directory, 'recipes');
+  FS.readdir(recipeDir, function(err, recipes) {
+    if (err) throw err;
+    recipes.forEach(function(recipe) {
+      FS.readFile(Path.join(recipeDir, recipe), function(err, contents) {
+        if (err) throw err;
+        try {
+          contents = JSON.parse(contents);
+        } catch (e) {
+          console.log('Recipe ' + recipe + ' contains invalid JSON:' + e.toString());
+          throw e;
+        }
+        postRecipe(args, recipe, contents, creds, function(resp) {
+          if (!resp.success) {
+            console.log('FAILURE while publishing ' + Path.join(recipeDir, recipe) + '\nDetails' + JSON.stringify(resp));
+          } else {
+            console.log('Published recipe ' + recipe);
+          }
+        });
+      })
+    });
+  })
 }
 
-var postApp = function(args, name, app, creds, callback) {
-  var apiCall = args.host + '/v1/app';
-  var callBody = {
-    name: name,
-    app: app
-  }
+var postRecipe = function(args, name, recipe, creds, callback) {
+  var apiCall = args.host + '/v1/app/recipe';
+  var callBody = recipe;
   Request({
     url: apiCall,
     method: 'post',
