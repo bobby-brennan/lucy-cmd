@@ -64,7 +64,7 @@ Publish.run = function(args) {
 }
 
 var postRecipe = function(args, name, recipe, creds, callback) {
-  var apiCall = args.host + '/v1/app/recipe';
+  var apiCall = args.host + '/v0/app/recipe';
   var callBody = recipe;
   Request({
     url: apiCall,
@@ -82,7 +82,7 @@ var postRecipe = function(args, name, recipe, creds, callback) {
 }
 
 var postFile = function(contents, args, creds, callback) {
-  var apiCall = args.host + '/v1/app/' + args.type;
+  var apiCall = args.host + '/v0/app/' + args.type;
   var callBody = {
       name: args.name,
       language: args.language,

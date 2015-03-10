@@ -59,7 +59,7 @@ var createApp = function(args, callback) {
 }
 
 var build = function(args, creds, callback) {
-  var apiCall = args.host + '/v1/app/build';
+  var apiCall = args.host + '/v0/app/build';
   createApp(args, function(app) {
     var callBody = {
         server_language: args.server,
